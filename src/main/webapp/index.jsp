@@ -14,13 +14,13 @@
         <title>Comments</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Comments</h1>
         <%
 
 List<commentStore> lcomment = (List<commentStore>)request.getAttribute("comments");
 if (lcomment==null){
  %>
-	<p>No faults found</p>
+	<p>No comments found</p>
 	<% 
 }else{
 %>
