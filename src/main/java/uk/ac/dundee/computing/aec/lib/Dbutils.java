@@ -90,7 +90,7 @@ public class Dbutils {
             return;
         }
         String sqlQuery = "CREATE TABLE IF NOT EXISTS comments.comment ("
-                + "`idcomment` INT NOT NULL AUTO_INCREMENT," + "`comment` VARCHAR(1000) NULL,"
+                + "`idcomment` INT NOT NULL AUTO_INCREMENT," + "`comment` VARCHAR(1000) NULL, `picture` varchar(100),"
                 + "PRIMARY KEY (`idcomment`))";
         try {
             Statement smt = Conn.createStatement();

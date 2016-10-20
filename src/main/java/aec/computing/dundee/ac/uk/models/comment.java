@@ -65,9 +65,7 @@ public class comment {
             System.out.println("Statement executed");
             if (rs.wasNull()) {
                 System.out.println("result set was null");
-            } else {
-                System.out.println("Well it wasn't null");
-            }
+            } 
             while (rs.next()) {
                 System.out.println("Getting RS");
                 ps = new commentStore();
@@ -99,17 +97,15 @@ public class comment {
             System.out.println("No Connection in comment Model");
             return;
         }
-
-        Statement stmt = null;
-        String sqlQuery = "Insert into comments.comment (comment) values (" + comment + ")";
+        String sqlQuery = "Insert into comments.comment (comment) values ('" + comment + "')";
         System.out.println("comment Query " + sqlQuery);
 
         try {
             // pmst = Conn.prepareStatement(sqlQuery);
-            stmt = Conn.createStatement();
+            Statement  stmt = Conn.createStatement();
             stmt.execute(sqlQuery);
         } catch (Exception et) {
-            System.out.println("Can't create prepare statement");
+            System.out.println("Can't execute insert "+et );
             return;
         }
         try {
