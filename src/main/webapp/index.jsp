@@ -15,6 +15,16 @@
     </head>
     <body>
         <h1>Comments</h1>
+       
+        
+        
+        <form action="comments" method ="Post">
+            Comment: <input type="text" name="comment"><br>
+            <button type="submit">Send your message</button>
+            
+            
+        </form>
+        <hr>
         <%
 
 List<commentStore> lcomment = (List<commentStore>)request.getAttribute("comments");

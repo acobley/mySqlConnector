@@ -43,9 +43,8 @@ public class comment {
             return null;
         }
 
-        PreparedStatement pmst = null;
         Statement stmt = null;
-        String sqlQuery = "select * from comment";
+        String sqlQuery = "select * from comments.comment";
         System.out.println("comment Query " + sqlQuery);
         try {
             try {
@@ -87,6 +86,52 @@ public class comment {
             return null;
         }
         return psl;
+
+    }
+    
+    
+    public void SaveComment(String comment) {
+        Connection Conn;
+
+        ResultSet rs = null;
+        try {
+            Conn = _ds.getConnection();
+        } catch (Exception et) {
+
+            System.out.println("No Connection in comment Model");
+            return;
+        }
+
+        Statement stmt = null;
+        String sqlQuery = "Insert into comments.comment (comment) values ("+comment+")";
+        System.out.println("comment Query " + sqlQuery);
+      
+            try {
+                // pmst = Conn.prepareStatement(sqlQuery);
+                stmt = Conn.createStatement();
+            } catch (Exception et) {
+                System.out.println("Can't create prepare statement");
+                return ;
+            }
+            System.out.println("Created prepare");
+            try {
+                // rs=pmst.executeQuery();
+                rs = stmt.executeQuery(sqlQuery);
+            } catch (Exception et) {
+                System.out.println("Can not execut query " + et);
+                return ;
+            }
+            System.out.println("Statement executed");
+          
+  
+
+        try {
+
+            Conn.close();
+        } catch (Exception ex) {
+            return ;
+        }
+        return;
 
     }
 }

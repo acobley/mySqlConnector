@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 import javax.naming.Binding;
 import javax.naming.Context;
@@ -80,25 +81,25 @@ public class Dbutils {
         } catch (Exception et) {
             return;
         }
-
-        String sqlQuery = "CREATE TABLE IF NOT EXISTS `comment` ("
-                + "`idcomment` INT NOT NULL AUTO_INCREMENT," + "`comment` VARCHAR(45) NULL,"
-                + "PRIMARY KEY (`idcomment`))" + "ENGINE = InnoDB;";
+        String makedatabase = "Create database IF NOT EXISTS  comments";
         try {
-            pmst = Conn.prepareStatement(sqlQuery);
+            pmst = Conn.prepareStatement(makedatabase);
             pmst.executeUpdate();
         } catch (Exception ex) {
             System.out.println("Can not create table " + ex);
             return;
         }
-        sqlQuery = "insert into comment (comment) values ('test');";
+        String sqlQuery = "use comments;CREATE TABLE IF NOT EXISTS `comments.comment` ("
+                + "`idcomment` INT NOT NULL AUTO_INCREMENT," + "`comment` VARCHAR(1000) NULL,"
+                + "PRIMARY KEY (`idcomment`))";
         try {
-            pmst = Conn.prepareStatement(sqlQuery);
-            pmst.executeUpdate();
+            Statement smt =Conn.createStatement();
+            smt.execute(sqlQuery);
+            
         } catch (Exception ex) {
-            System.out.println("Can not insert table " + ex);
+            System.out.println("Can not create table " + ex);
             return;
         }
-
+        
     }
 }

@@ -74,6 +74,13 @@ public class comments extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String Comment=request.getParameter("comment");
+         comment cc = new comment();
+        cc.setDatasource(_ds);
+        cc.SaveComment(Comment);
+        LinkedList<commentStore> psl = cc.getComments();
+        request.setAttribute("comments", psl); //Set a bean with the list in it
+        RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
 
     }
 
