@@ -74,7 +74,7 @@ public class Dbutils {
 
     // create the schema if it doesn't exist
     private void CreateSchema(DataSource _ds) {
-        PreparedStatement pmst = null;
+
         Connection Conn;
         try {
             Conn = _ds.getConnection();
@@ -83,8 +83,8 @@ public class Dbutils {
         }
         String makedatabase = "Create database IF NOT EXISTS  comments";
         try {
-            pmst = Conn.prepareStatement(makedatabase);
-            pmst.executeUpdate();
+            Statement smt = Conn.createStatement();
+            smt.execute(makedatabase);
         } catch (Exception ex) {
             System.out.println("Can not create table " + ex);
             return;
@@ -93,13 +93,13 @@ public class Dbutils {
                 + "`idcomment` INT NOT NULL AUTO_INCREMENT," + "`comment` VARCHAR(1000) NULL,"
                 + "PRIMARY KEY (`idcomment`))";
         try {
-            Statement smt =Conn.createStatement();
+            Statement smt = Conn.createStatement();
             smt.execute(sqlQuery);
-            
+
         } catch (Exception ex) {
             System.out.println("Can not create table " + ex);
             return;
         }
-        
+
     }
 }
