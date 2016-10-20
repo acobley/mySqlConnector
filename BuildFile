@@ -1,0 +1,17 @@
+// This file is used to build the Docker env for this project
+
+mkdir mysql
+cd mysql
+mkdir mysql
+docker stop some-mysql
+docker rm some-mysql
+docker run -p 3307:3306 -v "$PWD/mysql:/var/lib/mysql" --name some-mysql -e MYSQL_ROOT_PASSWORD=S1mpl3mysql! -d mysql:latest
+
+mkdir tomcat
+git clone https://github.com/acobley/TomcatConf.git tomcat
+cd tomcat
+docker stop tomcat
+docker rm tomcat
+docker run -it -d -p 8082:8080 --name tomcat --link some-mysql:mysql  -v "$PWD/conf/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml:ro" tomcat:8.0
+
+
