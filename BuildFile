@@ -6,7 +6,7 @@ mkdir mysql
 docker stop some-mysql
 docker rm some-mysql
 docker run -p 3307:3306 -v "$PWD/mysql:/var/lib/mysql" --name some-mysql -e MYSQL_ROOT_PASSWORD=S1mpl3mysql! -d mysql:latest
-
+cd ..
 mkdir tomcat
 git clone https://github.com/acobley/TomcatConf.git tomcat
 cd tomcat
