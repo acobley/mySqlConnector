@@ -11,6 +11,7 @@ package aec.computing.dundee.ac.uk.stores;
  */
 public class commentStore {
     private String comment=null;
+    private String pic=null;
     public commentStore(){
         
     }
@@ -18,8 +19,15 @@ public class commentStore {
     public void setComment(String comment){
         this.comment=comment;
     }
+    public void setPic(String Pic){
+        this.pic=Pic;
+    }
     
     public String getComment(){
         return comment;
+    }
+    
+    public String getPic(){
+        return pic;
     }
 }

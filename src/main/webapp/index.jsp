@@ -18,8 +18,9 @@
        
         
         
-        <form action="comments" method ="Post">
-            Comment: <input type="text" name="comment"><br>
+        <form action="comments" enctype="multipart/form-data" method ="Post">
+            <input type="text" name="comment"><br>
+            File to upload: <input type="file" name="file"><br/>
             <button type="submit">Send your message</button>
             
             
@@ -45,7 +46,12 @@ while (iterator.hasNext()){
 	commentStore md = (commentStore)iterator.next();
 	
 	%>
-	<%=md.getComment() %><br/><%
+        <div id="comments">
+            <img src="Pics/<%=md.getPic()%>"><br>
+            <%=md.getComment() %> <br/>
+        
+        </div>
+        <%
 	
 }
 }

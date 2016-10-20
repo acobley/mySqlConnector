@@ -70,6 +70,8 @@ public class comment {
                 System.out.println("Getting RS");
                 ps = new commentStore();
                 ps.setComment(rs.getString("comment"));
+                ps.setPic(rs.getString("Picture"));
+                
                 psl.add(ps);
             }
         } catch (Exception ex) {
@@ -87,7 +89,7 @@ public class comment {
 
     }
 
-    public void SaveComment(String comment) {
+    public void SaveComment(String comment,String filename) {
         Connection Conn;
 
         try {
@@ -97,7 +99,7 @@ public class comment {
             System.out.println("No Connection in comment Model");
             return;
         }
-        String sqlQuery = "Insert into comments.comment (comment) values ('" + comment + "')";
+        String sqlQuery = "Insert into comments.comment (comment,picture) values ('" + comment + "','"+filename+"')";
         System.out.println("comment Query " + sqlQuery);
 
         try {
