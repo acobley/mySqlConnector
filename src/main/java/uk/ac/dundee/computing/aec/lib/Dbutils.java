@@ -89,11 +89,12 @@ public class Dbutils {
             System.out.println("Can not create table " + ex);
             return;
         }
-        String sqlQuery = "use comments;CREATE TABLE IF NOT EXISTS `comments.comment` ("
+        String sqlQuery = "CREATE TABLE IF NOT EXISTS comments.comment ("
                 + "`idcomment` INT NOT NULL AUTO_INCREMENT," + "`comment` VARCHAR(1000) NULL,"
                 + "PRIMARY KEY (`idcomment`))";
         try {
             Statement smt = Conn.createStatement();
+           
             smt.execute(sqlQuery);
 
         } catch (Exception ex) {
