@@ -63,12 +63,14 @@ public class comment {
                 System.out.println("Can not execut query " + et);
                 return null;
             }
-            System.out.println("Statement executed");
+            System.out.println("Statement executed '"+rs+"'");
+            /*
             if (rs.wasNull()) {
                 System.out.println("result set was null");
+                return null;
             } else {
                 System.out.println("Well it wasn't null");
-            }
+            }*/
             while (rs.next()) {
                 System.out.println("Getting RS");
                 ps = new commentStore();
