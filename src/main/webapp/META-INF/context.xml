@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="/MySQLConnector">
-  <Resource auth="Container" driverClassName="com.mysql.cj.jdbc.Driver" factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer" name="jdbc/Faultdb" password="dacjd156n." type="javax.sql.DataSource" url="jdbc:mysql://127.0.0.1:3307/comments" username="root"/>
+  <Resource auth="Container" driverClassName="com.mysql.cj.jdbc.Driver" factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer" name="jdbc/Faultdb" password="dacjd156n." type="javax.sql.DataSource" url="jdbc:mysql://mysql:3306/comments" username="root"/>
 </Context>
