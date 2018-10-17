@@ -11,10 +11,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Comments</title>
+        <title>Comments form users</title>
     </head>
     <body>
-        <h1>Comments</h1>
+        <h1>Comments from users</h1>
         <%
 
 List<commentStore> lcomment = (List<commentStore>)request.getAttribute("comments");
