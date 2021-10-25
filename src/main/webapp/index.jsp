@@ -11,17 +11,32 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Comments form users</title>
+        <title>Comments from users</title>
     </head>
     <body>
         <h1>Comments from users</h1>
+        <p><a href="/MySQLConnector/comments">List Comments</a></p>
         <%
 
 List<commentStore> lcomment = (List<commentStore>)request.getAttribute("comments");
+List<commentStore> logs = (List<commentStore>)request.getAttribute("logs");
 if (lcomment==null){
  %>
 	<p>No comments found</p>
 	<% 
+            Iterator<commentStore> iterator;
+            if (logs==null){
+            %>
+	<p>No logs found !</p>
+	<% }else{
+            iterator = logs.iterator();
+            while (iterator.hasNext()){
+	commentStore md = (commentStore)iterator.next();
+	
+	%>
+	<%=md.getComment() %><br/><%
+            }
+}
 }else{
 %>
 

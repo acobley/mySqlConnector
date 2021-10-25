@@ -10,14 +10,14 @@ import aec.computing.dundee.ac.uk.stores.commentStore;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedList;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebInitParam;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebInitParam;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import uk.ac.dundee.computing.aec.lib.Dbutils;
 
@@ -29,15 +29,22 @@ import uk.ac.dundee.computing.aec.lib.Dbutils;
         initParams = {
             @WebInitParam(name = "data-source", value = "jdbc/Faultdb")
         })
-public class comments extends HttpServlet {
 
+
+public class comments extends HttpServlet {
+    LinkedList<commentStore> log=new LinkedList<commentStore>();
     private static final long serialVersionUID = 1L;
     private DataSource _ds = null;
 
     public void init(ServletConfig config) throws ServletException {
         // TODO Auto-generated method stub
         Dbutils db = new Dbutils();
-        _ds = db.assemble(config);
+        commentStore clog= new commentStore();
+            clog.setComment("init comments" );
+            log.add(clog);
+        _ds = db.assemble(config,log);
+        
+       
 
     }
 
@@ -53,10 +60,15 @@ public class comments extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        commentStore clog= new commentStore();
+            clog.setComment("do get" );
+            log.add(clog);
         comment cc = new comment();
         cc.setDatasource(_ds);
         LinkedList<commentStore> psl = cc.getComments();
+        request.setAttribute("logs", log);
         request.setAttribute("comments", psl); //Set a bean with the list in it
+        
         RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
 
         rd.forward(request, response);

@@ -1,5 +1,6 @@
 package uk.ac.dundee.computing.aec.lib;
 
+import aec.computing.dundee.ac.uk.stores.commentStore;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -10,8 +11,9 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletException;
+import java.util.LinkedList;
 import javax.sql.DataSource;
 
 public class Dbutils {
@@ -37,7 +39,7 @@ public class Dbutils {
     /**
      * Assembles a DataSource from JNDI.
      */
-    public DataSource assemble(ServletConfig config) throws ServletException {
+    public DataSource assemble(ServletConfig config,  LinkedList<commentStore> log) throws ServletException {
         DataSource _ds = null;
         String dataSourceName = config.getInitParameter("data-source");
         System.out.println("Data Source Parameter " + dataSourceName);
@@ -66,18 +68,22 @@ public class Dbutils {
         } catch (NamingException e) {
             throw new ServletException("Cant find datasource name " + dataSourceName + " Error " + e);
         }
-        this.CreateSchema(_ds);
+        this.CreateSchema(_ds,log);
         return _ds;
 
     }
 
     // create the schema if it doesn't exist
-    private void CreateSchema(DataSource _ds) {
+    private void CreateSchema(DataSource _ds,LinkedList<commentStore> log) {
         PreparedStatement pmst = null;
         Connection Conn;
         try {
             Conn = _ds.getConnection();
         } catch (Exception et) {
+            System.out.println("Can not get connection " + et);
+            commentStore cc= new commentStore();
+            cc.setComment("Can not get connection " + et);
+            log.add(cc);
             return;
         }
 
@@ -91,13 +97,15 @@ public class Dbutils {
             System.out.println("Can not create table " + ex);
             return;
         }
-        sqlQuery = "insert into comment (comment) values ('test');";
+        for (int i=0;i<10;i++){
+        sqlQuery = "insert into comment (comment) values ('test "+i+"');";
         try {
             pmst = Conn.prepareStatement(sqlQuery);
             pmst.executeUpdate();
         } catch (Exception ex) {
             System.out.println("Can not insert table " + ex);
             return;
+        }
         }
 
     }
